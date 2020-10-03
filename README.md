@@ -13,4 +13,11 @@ Create a container from the image.
 ```
 $ sudo docker run --rm -p 8080:8080 gcr.io/fake-tweet-detection/fake-tweet-backend:v1
 ```
+
+### Push the container to cloud
+Push the container to GCP:
+```
+$ sudo docker push gcr.io/fake-tweet-detection/fake-tweet-backend:v1
+```
+
 Now visit http://localhost:8080
