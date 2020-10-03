@@ -1,6 +1,8 @@
 # Fake Tweet Detection System
 Python Flask app in Docker which detects whether a tweet is factually correct or inaccurate.
 
+POST: http://34.123.199.55/predict_tweet with a json {"tweet": "the tweet text goes here"} and will receive a json {"result":"fake"}
+
 ### Build application
 Build the Docker image manually by cloning the Git repo.
 ```
