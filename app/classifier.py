@@ -21,20 +21,21 @@ import pickle
 
 class ModelWrapper(object):
 
-    def __init__(self, model, count_vectorizer):
+    def __init__(self, model, pipe):
         self.model = model
-        self.cv = count_vectorizer
+        self.pipe = pipe
 
-    def transform_predict(self, value):
-        tokens = word_tokenize(value)
+    def transform_predict(self, tweet):
+        tokens = word_tokenize(tweet)
         lemmatizer = WordNetLemmatizer()
         words = [lemmatizer.lemmatize(token) for token in tokens]
 
-        cleaned_tweet = ' '.join(words)
+        cleaned_tweet = ' '.join([word for word in words if word not in stop_words])
 
-        X = self.cv.transform([cleaned_tweet])
-        result = self.model.predict(X)
-        return result
+        X = self.pipe.transform([cleaned_tweet])
+        class_ = self.model.predict(X)
+
+        return np.array([le.classes_[class_]])
 
 def load_dataset(datapath):
     '''
