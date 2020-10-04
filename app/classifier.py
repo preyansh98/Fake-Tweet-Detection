@@ -35,7 +35,10 @@ class ModelWrapper(object):
         X = self.pipe.transform([cleaned_tweet])
         class_ = self.model.predict(X)
 
-        return np.array([le.classes_[class_]])
+        if class_ == 0:
+            return np.array(['fake'])
+        else:
+            return np.array(['real'])
 
 def load_dataset(datapath):
     '''
